@@ -143,3 +143,70 @@ The **OSI (Open Systems Interconnection) Model** is a **conceptual framework** t
 **Data units**: Bits → Frames → Packets → Segments → Messages.
 
 ---
+
+### Process vs thread
+
+A `process` is an instance of a running program with its own independent memory space, while a `thread` is the smallest unit of execution within a process and shares the process's memory space with other threads.
+
+Processes are heavyweight, requiring more time to create and switch between, but offer better fault isolation. Threads are lightweight, enabling faster creation and context switching, which improves performance through parallelism, but an error in one thread can crash the entire process.
+
+# Operating System
+
+### What is synchronization in Operating system?
+
+Synchronization in an Operating System refers to the coordination of processes or threads to ensure that shared resources (like memory, files, or variables) are accessed safely and correctly when multiple threads or processes run concurrently.
+
+#### Goal of Synchronization:
+
+* Ensure mutual exclusion: only one process/thread accesses a critical section at a time.
+* Maintain data consistency and correct program behavior.
+* Coordinate order of execution when certain operations must happen before others.
+
+### Q. What's Deadlock?
+
+A **Deadlock** in an Operating System occurs when **two or more processes are waiting indefinitely for each other** to release resources — and as a result, **none of them can proceed**.
+
+---
+
+#### Necessary Conditions for Deadlock (Coffman Conditions)
+
+A deadlock can occur **only if all four conditions hold simultaneously**:
+
+1. **Mutual Exclusion** – At least one resource is non-shareable.
+2. **Hold and Wait** – A process is holding at least one resource and waiting for others.
+3. **No Preemption** – Resources cannot be forcibly taken away; they must be released voluntarily.
+4. **Circular Wait** – A circular chain of processes exists, each waiting for a resource held by the next.
+
+---
+
+#### Practical Avoidance in Real Systems
+
+In real-world programming (like Java or C++ multithreading):
+* Always acquire locks in a fixed order.
+* Use timeout locks (e.g., tryLock(timeout) in Java).
+* Avoid nested locking when possible.
+* Minimize the scope of synchronized blocks.
+
+### Q. HTTP vs HTTPS?
+
+**HTTP vs HTTPS (Interview Answer):**
+
+* **Definition:**
+  HTTP (HyperText Transfer Protocol) is used for data communication over the web. HTTPS (HTTP Secure) is the secure version of HTTP that uses encryption.
+
+* **Security:**
+  HTTP transmits data in plain text; HTTPS encrypts data using **SSL/TLS**, preventing eavesdropping and tampering.
+
+* **Port:**
+  HTTP uses **port 80**, while HTTPS uses **port 443**.
+
+* **Certificate:**
+  HTTPS requires an **SSL/TLS certificate** issued by a Certificate Authority (CA) to verify the website’s authenticity.
+
+* **Performance:**
+  HTTPS adds slight overhead due to encryption but is optimized with modern hardware.
+
+* **Usage:**
+  HTTP is used for non-sensitive data; HTTPS is used for **secure communication** (banking, payments, login forms).
+
+**In short:** HTTPS = HTTP + Encryption + Authentication + Data Integrity.
