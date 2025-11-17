@@ -542,3 +542,212 @@ If a **GET API is very slow due to DB load**, here’s how I would approach fixi
 If my GET API is slow due to DB load, I’d first profile and optimize queries with proper indexing and pagination. Then, I’d reduce DB stress using caching (Redis), read replicas, and precomputation (materialized views/summary tables). On the API side, I’d ensure we only fetch necessary fields, paginate results, and possibly stream data. If scale grows further, I’d shard/partition the DB. This ensures the API responds fast and remains scalable.
 
 ---
+
+
+## Q.6. Write me some dummy/mock APIs using java, spring boot, JPA to create a book search system. 
+Where you could search books through author name, book name and could filter books by their rating, number of pages, etc.
+
+Here’s a **mock Book Search System** built with **Spring Boot + JPA**, showing realistic REST APIs for searching and filtering books.
+Everything is dummy — perfect for practice or portfolio.
+
+---
+
+### 🧩 Features
+
+* Search books by **book name** or **author name**
+* Filter books by **rating**, **number of pages**, etc.
+* Uses **Spring Data JPA** for query building
+* Clean layered architecture (`Controller → Service → Repository → Entity`)
+
+---
+
+### 📁 Folder Structure
+
+```
+com.example.booksearch
+ ├── controller
+ │    └── BookController.java
+ ├── service
+ │    └── BookService.java
+ ├── repository
+ │    └── BookRepository.java
+ ├── model
+ │    └── Book.java
+ └── BookSearchApplication.java
+```
+
+---
+
+### 1️⃣ `Book.java`
+
+```java
+package com.example.booksearch.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="books")
+public class Book {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+    private String author;
+    private double rating;
+    private int pages;
+
+    // Constructors
+    public Book() {}
+    public Book(String title, String author, double rating, int pages) {
+        this.title=title;
+        this.author=author;
+        this.rating=rating;
+        this.pages=pages;
+    }
+
+    // Getters/Setters
+    public Long getId(){return id;}
+    public String getTitle(){return title;}
+    public void setTitle(String title){this.title=title;}
+    public String getAuthor(){return author;}
+    public void setAuthor(String author){this.author=author;}
+    public double getRating(){return rating;}
+    public void setRating(double rating){this.rating=rating;}
+    public int getPages(){return pages;}
+    public void setPages(int pages){this.pages=pages;}
+}
+```
+
+---
+
+### 2️⃣ `BookRepository.java`
+
+```java
+package com.example.booksearch.repository;
+
+import com.example.booksearch.model.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import java.util.List;
+
+public interface BookRepository extends JpaRepository<Book,Long> {
+
+    // Search by title or author (case-insensitive)
+    @Query("SELECT b FROM Book b WHERE LOWER(b.title) LIKE LOWER(CONCAT('%',:query,'%')) " +
+           "OR LOWER(b.author) LIKE LOWER(CONCAT('%',:query,'%'))")
+    List<Book> searchByTitleOrAuthor(String query);
+
+    // Filter by rating and page count
+    List<Book> findByRatingGreaterThanEqualAndPagesLessThanEqual(double rating, int pages);
+}
+```
+
+---
+
+### 3️⃣ `BookService.java`
+
+```java
+package com.example.booksearch.service;
+
+import com.example.booksearch.model.Book;
+import com.example.booksearch.repository.BookRepository;
+import org.springframework.stereotype.Service;
+import java.util.List;
+
+@Service
+public class BookService {
+    private final BookRepository repo;
+
+    public BookService(BookRepository repo){this.repo=repo;}
+
+    public List<Book> searchBooks(String query){
+        return repo.searchByTitleOrAuthor(query);
+    }
+
+    public List<Book> filterBooks(double minRating,int maxPages){
+        return repo.findByRatingGreaterThanEqualAndPagesLessThanEqual(minRating,maxPages);
+    }
+
+    public Book addBook(Book book){
+        return repo.save(book);
+    }
+
+    public List<Book> getAllBooks(){
+        return repo.findAll();
+    }
+}
+```
+
+---
+
+### 4️⃣ `BookController.java`
+
+```java
+package com.example.booksearch.controller;
+
+import com.example.booksearch.model.Book;
+import com.example.booksearch.service.BookService;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/books")
+public class BookController {
+    private final BookService service;
+
+    public BookController(BookService service){this.service=service;}
+
+    @PostMapping
+    public Book addBook(@RequestBody Book book){
+        return service.addBook(book);
+    }
+
+    @GetMapping
+    public List<Book> getAllBooks(){
+        return service.getAllBooks();
+    }
+
+    @GetMapping("/search")
+    public List<Book> searchBooks(@RequestParam String q){
+        return service.searchBooks(q);
+    }
+
+    @GetMapping("/filter")
+    public List<Book> filterBooks(@RequestParam double minRating,@RequestParam int maxPages){
+        return service.filterBooks(minRating,maxPages);
+    }
+}
+```
+
+---
+
+### 5️⃣ `BookSearchApplication.java`
+
+```java
+package com.example.booksearch;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class BookSearchApplication {
+    public static void main(String[] args){
+        SpringApplication.run(BookSearchApplication.class,args);
+    }
+}
+```
+
+---
+
+### 🧪 Example API Calls
+
+| Endpoint                                           | Description              | Example                                                                             |
+| -------------------------------------------------- | ------------------------ | ----------------------------------------------------------------------------------- |
+| `POST /api/books`                                  | Add a new book           | `{ "title": "Clean Code", "author": "Robert Martin", "rating": 4.8, "pages": 464 }` |
+| `GET /api/books/search?q=martin`                   | Search by author/title   | —                                                                                   |
+| `GET /api/books/filter?minRating=4.5&maxPages=500` | Filter by rating & pages | —                                                                                   |
+
+---
+
+Would you like me to extend this to include **pagination + sorting + specification-based filtering (JPA Criteria API)** for real-world search scalability?

@@ -488,6 +488,80 @@ This returns all rows, bypassing authentication.
 5. **Keep DB error messages generic** – avoid leaking SQL structure.
 
 
-## Q.18. Explain **difference between WHERE and HAVING** clause
-## Q.19. What is a **Stored Procedure**, and how does it differ from a **Function**?
-## Q.20. What is a **Trigger**, and when would you use it?
+## Q.num. Teach me about CS fundamentals like DRY, KISS, SOLID, ACID?
+
+Here’s a concise breakdown of those key **Computer Science fundamentals** you mentioned — useful for interviews and daily engineering work:
+
+---
+
+### 🧩 **1. DRY — Don’t Repeat Yourself**
+
+**Meaning:** Avoid duplicating logic or code.
+**Goal:** Reuse code via abstraction (functions, classes, modules).
+**Example:**
+❌ Bad:
+
+```java
+int areaSquare(int s){return s*s;}
+int areaRectangle(int l,int b){return l*b;}
+```
+
+✅ Good:
+
+```java
+int area(int l,int b){return l*b;}
+```
+
+**Benefit:** Easier maintenance, less chance of bugs.
+
+---
+
+### 🧠 **2. KISS — Keep It Simple, Stupid**
+
+**Meaning:** Prefer simple, clear, and readable solutions over clever or overengineered ones.
+**Goal:** Code should be easy to read, debug, and extend.
+**Example:**
+❌ Bad (overcomplicated loop):
+
+```java
+for(int i=0;i<arr.length;i++) if(arr[i]%2==0) result.add(arr[i]);
+```
+
+✅ Good:
+
+```java
+for(int num:arr){if(num%2==0) result.add(num);}
+```
+
+**Benefit:** Reduces complexity and errors.
+
+---
+
+### 🧱 **3. SOLID Principles** *(Object-Oriented Design)*
+
+Used to write maintainable and scalable OOP systems.
+
+| Principle                     | Meaning                                          | Short Example                                                  |
+| ----------------------------- | ------------------------------------------------ | -------------------------------------------------------------- |
+| **S – Single Responsibility** | A class should have only one reason to change.   | `InvoicePrinter` shouldn’t also handle database updates.       |
+| **O – Open/Closed**           | Open for extension, closed for modification.     | Use interfaces or inheritance to add new behavior.             |
+| **L – Liskov Substitution**   | Subclasses should be usable as their base class. | A `Square` should behave correctly when used as a `Rectangle`. |
+| **I – Interface Segregation** | Don’t force classes to implement unused methods. | Split big interfaces into smaller ones.                        |
+| **D – Dependency Inversion**  | Depend on abstractions, not concretions.         | Use interfaces and dependency injection.                       |
+
+---
+
+### 💾 **4. ACID Properties (Databases)**
+
+Guarantees reliable transactions in databases.
+
+| Property            | Meaning                                                    | Example                                                     |
+| ------------------- | ---------------------------------------------------------- | ----------------------------------------------------------- |
+| **A – Atomicity**   | All or nothing. Transaction fully completes or rolls back. | Money transfer: debit and credit both succeed or both fail. |
+| **C – Consistency** | Database remains valid before and after transaction.       | Total bank balance remains unchanged after transfer.        |
+| **I – Isolation**   | Concurrent transactions don’t interfere.                   | Two users withdrawing at once don’t cause race conditions.  |
+| **D – Durability**  | Once committed, changes survive crashes.                   | Data written to disk/logs before confirmation.              |
+
+---
+
+Would you like me to continue next with **CAP theorem**, **ACID vs BASE**, or **OOP design principles** (like cohesion & coupling)?
