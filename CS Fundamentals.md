@@ -152,7 +152,7 @@ Processes are heavyweight, requiring more time to create and switch between, but
 
 # Operating System
 
-### Q.1. What is synchronization in Operating system?
+### Q.1: What is synchronization in Operating system?
 
 Synchronization in an Operating System refers to the coordination of processes or threads to ensure that shared resources (like memory, files, or variables) are accessed safely and correctly when multiple threads or processes run concurrently.
 
@@ -162,7 +162,7 @@ Synchronization in an Operating System refers to the coordination of processes o
 * Maintain data consistency and correct program behavior.
 * Coordinate order of execution when certain operations must happen before others.
 
-## Q.2. What's Deadlock?
+## Q.2: What's Deadlock?
 
 A **Deadlock** in an Operating System occurs when **two or more processes are waiting indefinitely for each other** to release resources — and as a result, **none of them can proceed**.
 
@@ -187,11 +187,11 @@ In real-world programming (like Java or C++ multithreading):
 * Avoid nested locking when possible.
 * Minimize the scope of synchronized blocks.
 
-## Q.1. What is the difference between process and thread?
+## Q.3: What is the difference between process and thread?
 
 
 
-## Q.1. What is the difference between mutex vs semaphore?
+## Q.4: What is the difference between mutex vs semaphore?
 A mutex (mutual exclusion) is a synchronization primitive that acts as a lock, ensuring that only one thread can access a shared resource at a time, with an ownership concept where the thread that locks it must also unlock it.
 
 A semaphore, in contrast, is a signaling mechanism using a counter to control access to a pool of resources, allowing a specified number of threads to access the resource and potentially allowing any thread to signal its availability.
@@ -199,7 +199,7 @@ A semaphore, in contrast, is a signaling mechanism using a counter to control ac
 Mutexes are ideal for exclusive resource access, while semaphores are suited for managing limited, shared resources.
 
 
-## Q.2. What is context switching and when does it occur?
+## Q.5: What is context switching and when does it occur?
 
 **Context Switching:**
 The process of saving the state (CPU registers, program counter, etc.) of a running process/thread and loading the state of another so the CPU can switch execution.
@@ -210,24 +210,24 @@ The process of saving the state (CPU registers, program counter, etc.) of a runn
 * On **interrupts**, **I/O requests**, or **preemptive scheduling**.
 
 
-## Q.3. Explain paging and segmentation
-## Q.4. What is a page fault?
-## Q.5. What is a deadlock?
-## Q.6. What are the necessary conditions for deadlock?
-## Q.7. How can deadlocks be prevented or avoided?
-## Q.8. What is process synchronization and why is it needed?
-## Q.9. Explain the difference between preemptive and non-preemptive scheduling
-## Q.10. What are different CPU scheduling algorithms?
-## Q.11. What is a critical section problem?
-## Q.12. What is thrashing in OS?
-## Q.13. Explain virtual memory
-## Q.14. What is a semaphore and how is it used?
-## Q.15. What are system calls?
+## Q.6: Explain paging and segmentation
+## Q.7: What is a page fault?
+## Q.8: What is a deadlock?
+## Q.9: What are the necessary conditions for deadlock?
+## Q.10: How can deadlocks be prevented or avoided?
+## Q.11: What is process synchronization and why is it needed?
+## Q.12: Explain the difference between preemptive and non-preemptive scheduling
+## Q.13: What are different CPU scheduling algorithms?
+## Q.14: What is a critical section problem?
+## Q.15: What is thrashing in OS?
+## Q.16: Explain virtual memory
+## Q.17: What is a semaphore and how is it used?
+## Q.18: What are system calls?
 
 
 ---
 
-## Q. HTTP vs HTTPS?
+## Q.19:vs HTTPS?
 
 **HTTP vs HTTPS (Interview Answer):**
 
@@ -341,7 +341,7 @@ TLS uses **asymmetric encryption** during handshake for key exchange, then switc
 
 **Top DBMS (Database Management System) Interview Questions:**
 
-## Q.1. What’s the difference between **DBMS and RDBMS**?
+## Q.20: What’s the difference between **DBMS and RDBMS**?
 
 DBMS (Database Management System) 
 
@@ -363,12 +363,12 @@ RDBMS (Relational Database Management System)
 * Examples: Popular examples include SQL, MySQL, PostgreSQL, and Oracle. [1, 6]  
 
 
-## Q.2. Explain **Normalization** and why it’s needed.
+## Q.21: Explain **Normalization** and why it’s needed.
 
 `Normalization` is the process of reducing data redundancy in a table and improving data integrity. Data normalization is a technique used in databases to organize data efficiently. 
 Data normalization ensures that your data remains clean, consistent, and error-free by breaking it into smaller tables and linking them through relationships. This process reduces redundancy, improves data integrity, and optimizes database performance. 
 
-## Q.4. What’s the difference between **Primary Key, Candidate Key, and Foreign Key**?
+## Q.22: What’s the difference between **Primary Key, Candidate Key, and Foreign Key**?
 
 Candidate Key
 
@@ -394,7 +394,7 @@ Foreign Key
 	* Ensures referential integrity, meaning that values in the child table's foreign key must exist in the parent table's primary key. [1, 2]  
 	* Helps maintain data consistency and accuracy across the database. [9]  
 
-## Q.5. What is **ACID property** in transactions?
+## Q.23: What is **ACID property** in transactions?
 
 ACID properties (Atomicity, Consistency, Isolation, Durability) are a set of guarantees for reliable database transactions, ensuring data remains accurate, complete, and consistent even with system failures or concurrent access. Atomicity ensures a transaction is an all-or-nothing operation, Consistency maintains the database's integrity rules, Isolation prevents concurrent transactions from interfering, and Durability guarantees committed data persists even after system restarts or crashes.   
 Here's a breakdown of each property: 
@@ -424,9 +424,9 @@ Here's a breakdown of each property:
   * Example: After a transaction successfully transfers money and its changes are committed, those changes are guaranteed to be present in the database, even if the server reboots immediately after. 
 
 
-## Q.6. What’s the difference between **DELETE, TRUNCATE, and DROP**?
-## Q.7. Explain **JOINs** and list their types
-## Q.8. What is an **Index** and when can it **degrade performance**?
+## Q.24: What’s the difference between **DELETE, TRUNCATE, and DROP**?
+## Q.25: Explain **JOINs** and list their types
+## Q.26: What is an **Index** and when can it **degrade performance**?
 
 **Index:**
 An index is a data structure (usually a **B-tree** or **hash**) used by a database to speed up data retrieval operations. It works like an index in a book — instead of scanning every row, the DB uses the index to directly locate the required records.
@@ -439,9 +439,9 @@ An index is a data structure (usually a **B-tree** or **hash**) used by a databa
 4. **Low selectivity columns:** Index on columns with many duplicate values (like gender) provides little benefit but still adds maintenance cost.
 5. **Fragmentation:** Over time, indexes can become fragmented, increasing I/O and reducing efficiency.
 
-## Q.9. What’s the difference between **Clustered and Non-Clustered Index**?
-## Q.10. What are **Views** and why are they used?
-## Q.11. What’s **Normalization vs Denormalization**?
+## Q.27: What’s the difference between **Clustered and Non-Clustered Index**?
+## Q.28: What are **Views** and why are they used?
+## Q.29: What’s **Normalization vs Denormalization**?
 
 **Normalization:**
 A process of organizing data into multiple related tables to **reduce redundancy** and **ensure data integrity**.
@@ -462,12 +462,12 @@ The opposite — **combining tables** to improve **read performance** by reducin
 * Normalization → preferred for **transactional (OLTP)** systems.
 * Denormalization → preferred for **analytical/reporting (OLAP)** systems.
 
-## Q.12. Explain **Transaction Isolation Levels** and their trade-offs
-## Q.13. What are **Deadlocks in DBMS** and how can you prevent them?
-## Q.14. What is **Referential Integrity**?
-## Q.15. What’s the difference between **OLTP** and **OLAP** systems?
-## Q.16. Explain **Entity, Attribute, Relationship** in ER modeling
-## Q.17. What is **SQL Injection** and how can it be prevented?
+## Q.30: Explain **Transaction Isolation Levels** and their trade-offs
+## Q.31: What are **Deadlocks in DBMS** and how can you prevent them?
+## Q.32: What is **Referential Integrity**?
+## Q.33: What’s the difference between **OLTP** and **OLAP** systems?
+## Q.34: Explain **Entity, Attribute, Relationship** in ER modeling
+## Q.35: What is **SQL Injection** and how can it be prevented?
 
 **SQL Injection:**
 A web security vulnerability where attackers inject malicious SQL queries through user inputs to access or modify database data.
@@ -488,7 +488,7 @@ This returns all rows, bypassing authentication.
 5. **Keep DB error messages generic** – avoid leaking SQL structure.
 
 
-## Q.num. Teach me about CS fundamentals like DRY, KISS, SOLID, ACID?
+## Q.36: Teach me about CS fundamentals like DRY, KISS, SOLID, ACID?
 
 Here’s a concise breakdown of those key **Computer Science fundamentals** you mentioned — useful for interviews and daily engineering work:
 
